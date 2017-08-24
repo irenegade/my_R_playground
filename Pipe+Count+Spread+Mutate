@@ -1,0 +1,24 @@
+###use of PIPE operator (%>%) to insert var as first element of function 
+# makes it unnecesserary to store values in var??? 
+
+> glimpse(ucb_admit)
+Observations: 4,526
+Variables: 3
+$ Admit  <fctr> Admitted, Admitted, Admitted, Admitted, Admitted, Admitted,...
+$ Gender <fctr> Male, Male, Male, Male, Male, Male, Male, Male, Male, Male,...
+$ Dept   <chr> "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", ...
+
+> ucb_admit %>%
+    # Table of counts of admission status and gender
+    count(Gender, Admit) %>%
+    # Spread output across columns based on admission status
+    spread(Admit,n ) %>%
+    # Create new variable
+    mutate(Perc_Admit = Admitted / (Admitted + Rejected))
+Source: local data frame [2 x 4]
+Groups: Gender [2]
+
+  Gender Admitted Rejected Perc_Admit
+  <fctr>    <int>    <int>      <dbl>
+1   Male     1198     1493  0.4451877
+2 Female      557     1278  0.3035422
