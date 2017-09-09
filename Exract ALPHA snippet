@@ -1,0 +1,15 @@
+###extract words (no numbers)
+# Source: https://stackoverflow.com/questions/30912199/extract-letters-from-a-string-in-r
+
+extract.alpha <- function(x, space = ""){      
+  require(stringr)
+  require(purrr)
+  require(magrittr)
+  
+  y <- strsplit(unlist(x), "[^a-zA-Z]+") 
+  z <- y %>% map(~paste(., collapse = space)) %>% simplify()
+  return(z)}
+
+
+
+extract.alpha(x, space = " ")
